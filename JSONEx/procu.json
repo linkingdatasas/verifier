@@ -1,0 +1,25 @@
+{
+  "$class": "org.picert.cert",
+  "certId": "134083306",
+  "administrator": "resource:org.picert.Admin#admin@entidad.gov.co",
+  "typeC": "Assertion",
+  "name": "Certificado de Antecedentes", 
+  "message": [
+    "La PROCURADURIA GENERAL DE LA NACIÓN certifica que una vez consultado el Sistema de Información de Registro de Sanciones e Inhabilidades (SIRI), el(la) señor(a) CARLOS ALBERTO CASTRO IRAGORRI identificado(a) con Cédula de ciudadanía número 79947917: NO REGISTRA SANCIONES NI INHABILIDADES VIGENTES", "Nota...", "Advertencia..."
+  ],
+  "issuer": {
+    "$class": "composer.blockcerts.Issuer",
+    "id": "899999119",
+    "typen": "Profile",
+    "name": "Procuraduria General de la Nacion",
+    "image": "procu.png",
+    "signatureLines": {
+      "$class": "composer.blockcerts.SignatureLines",
+      "typen": "SignatureLine,Extension",
+      "name": "Manuel A. Espinosa",
+      "image": "firmaME.png",
+      "jobtitle": "Jefe Division Centro de Atencion al Publico"
+    }
+  },
+  "context": "https://w3id.org/openbadges/v2,https://w3id.org/blockcerts/v2"
+}
