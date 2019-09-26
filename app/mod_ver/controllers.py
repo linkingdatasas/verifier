@@ -1,5 +1,7 @@
 # Import flask dependencies
 from flask import Blueprint, request, jsonify, json
+from flask_cors import CORS
+
 import requests
 import urllib
 
@@ -10,6 +12,7 @@ from collections import OrderedDict
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
 mod_ver = Blueprint('ver', __name__)
+CORS(mod_ver)
 
 # Set the route and accepted methods
 @mod_ver.route('/verify/', methods=['POST'])
@@ -29,14 +32,14 @@ def verify():
     print(json_block)
     ### Se obtiene un json como respuesta
     ### Buscamos el hash en este json
-    hash_blockchain=json_block['certHash']
-    ### Verificamos que coincidan
-    if verificacion_hash(sha_signature,hash_blockchain):
-        res = "Es auténtico el certificado"
+    if len(json_block)>0:
+        hash_blockchain=json_block[0]['certHash']
+        ### Verificamos que coincidan
+        auten = verificacion_hash(sha_signature,hash_blockchain)
     else:
-        res = "Está alterado el certificado"
+        auten = False
     
-    return jsonify(res=res)
+    return jsonify(res=auten)
 
 
 
@@ -65,5 +68,5 @@ def request_bc(url,certID):
     ## Header Accept: application/json
     results = requests.get(url_total, headers={'Accept': 'application/json'})
     print(results.text)
-    abs_data = json.loads(results.text)[0] #first coincidence
+    abs_data = json.loads(results.text) #first coincidence
     return abs_data
