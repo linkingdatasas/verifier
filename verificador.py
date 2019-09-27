@@ -5,8 +5,7 @@
 
 
 import json
-import hashlib 
-import base64
+import hashlib
 from collections import OrderedDict
 import requests
 
@@ -36,18 +35,15 @@ def obtener_certId_json(data):
     return numero
 
 def url_id(url,certID):
-    url_total=url+certID
+    url_total=url+"?Id="+certID
     ## Header Accept: application/json
-    r = requests.post(url_total, headers={'Accept': 'application/json'})
-    ## Se supone que r es un json
-    return r
+    results = requests.get(url_total, headers={'Accept': 'application/json'})
+    abs_data = json.loads(results.text)[0] #first coincidence
+    return abs_data
 
-def id_blockchain(json_file):
-    data = json.load(json_file, object_pairs_hook=OrderedDict)
-    # Creamos una lista de los items del diccionario creado
-    items=list(data.items())
+def id_blockchain(json_obj):
     # Segun lo que veo del json retornado, el hash esta en la 4 posicion 
-    hash_code=items[3][1]
+    hash_code=json_obj['certHash']
     return hash_code
 
 
@@ -61,17 +57,18 @@ with open('prueba.json', encoding='utf-8') as json_file:
 hash_string=json.dumps(data, ensure_ascii=False,separators=(',', ':')).encode('utf8').decode()
 ### Hash del json subido por el usuario
 sha_signature = encrypt_string(hash_string)
+print(sha_signature)
 ### Buscamos el CertID en el json ingresado
 certID=obtener_certId_json(data)
 ### Buscamos ahora el hash de la blockchain, faltaria definir bien la url
-json_file_block=url_id('http://localhost:3000/api/abscert/',certID)
+json_file_block=url_id('http://localhost:3000/api/queries/selectAbsCertByCertId',certID)
+print(json_file_block)
 ### Se obtiene un json como respuesta
 ### Buscamos el hash en este json
 hash_blockchain=id_blockchain(json_file_block)
 ### Verificamos que coincidan
-variable_bool=verificacion_hash(hash_signature,hash_blockchain)
-if variable_bool==True:
-    print("Esta auténtico el certificado")
+if verificacion_hash(sha_signature,hash_blockchain):
+    print("Es auténtico el certificado")
 else:
-    print("Esta mal")
+    print("Está alterado el certificado")
 
