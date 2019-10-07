@@ -3,7 +3,16 @@ En este proyecto se encuentran los archivos python que permiten validar el certi
 
 
 # Prerequisitos
-Necesario tener instalado los programas python 3 y flask para el desarrollo web de python
+Necesario tener instalado el programa python 3.
+# Librerias
+Listado de librerias que se requieren tener instaladas en el python
+- flask 
+- flask_cors 
+- requests
+- urllib
+- json
+- hashlib
+- collections 
 
 # Carpetas
 ### App
