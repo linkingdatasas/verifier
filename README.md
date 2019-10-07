@@ -15,10 +15,23 @@ Listado de librerias que se requieren tener instaladas en el python
 - collections 
 
 # Carpetas
+
 ### App
+
 Esta es la carpeta que permite crear el desarrollo web del validador creado en python
 Se encuentran una subcarpeta y un archivo que enlaza la aplicación en flask con el puerto del computador.
 #### mod_ver
 Esta el archivo en python que permite la validación de los certificados se encuentra con el nombre de "controller.py".
 
+### JSONEx
 
+Carpeta que cuenta con los diferentes json empleados para comprobar el funcionamiento del programa
+
+### Transformador
+
+Carpeta que contiene la version 1.0 del archivo de python que se creo para la creación de archivos json desde un formato pdf.
+
+
+# Authors
+
+- Linking Data
